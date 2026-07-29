@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Simulador de Algoritmo Retórico</title>
+  <title>Simulação de Feed Retórico</title>
   <style>
     * {
       box-sizing: border-box;
@@ -17,10 +17,10 @@
       background-color: #f8fafc;
       color: #0f172a;
       line-height: 1.4;
-      padding-bottom: 40px;
+      padding-bottom: 30px;
     }
 
-    /* TOP BAR MOBILE */
+    /* BARRA SUPERIOR */
     .top-bar {
       background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
@@ -31,7 +31,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
     .brand-title {
@@ -52,43 +52,30 @@
       text-transform: uppercase;
     }
 
+    /* CONTAINER MOBILE-FIRST */
     .container {
       max-width: 480px;
       margin: 0 auto;
       padding: 16px;
     }
 
-    .view-section {
-      display: none;
-      animation: fadeIn 0.25s ease-out;
-    }
-
-    .view-section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .page-title {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 800;
       text-align: center;
       color: #0f172a;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       text-transform: uppercase;
     }
 
     .page-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       text-align: center;
       color: #475569;
       margin-bottom: 20px;
     }
 
-    /* MOCK FEED CARDS */
+    /* FEED CARDS */
     .feed-card {
       background: #ffffff;
       border-radius: 12px;
@@ -125,13 +112,11 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #e2e8f0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 0.8rem;
-      color: #475569;
     }
 
     .profile-info {
@@ -162,7 +147,7 @@
     .card-media {
       width: 100%;
       height: auto;
-      max-height: 420px;
+      max-height: 480px;
       object-fit: cover;
       display: block;
     }
@@ -197,206 +182,13 @@
     .tag-b { background: #fef3c7; color: #b45309; }
     .tag-c { background: #dbeafe; color: #1d4ed8; }
 
-    /* PANEL BOX */
-    .panel-box {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-
-    .panel-header {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .vote-input-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .vote-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #334155;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .vote-input {
-      width: 100%;
-      padding: 8px;
-      font-size: 1rem;
-      font-weight: 700;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      outline: none;
-    }
-
-    .bar-bg {
-      height: 6px;
-      background: #e2e8f0;
-      border-radius: 3px;
-      margin-top: 6px;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      width: 0%;
-      transition: width 0.3s;
-    }
-
-    .pct-text {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #64748b;
-      margin-top: 2px;
-      display: block;
-    }
-
-    /* BUTTONS */
-    .btn {
-      width: 100%;
-      padding: 12px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      transition: background 0.2s;
-    }
-
-    .btn-primary { background: #2563eb; color: #ffffff; }
-    .btn-primary:disabled { background: #94a3b8; opacity: 0.7; }
-    .btn-secondary { background: #ffffff; border: 1px solid #cbd5e1; color: #334155; }
-    .btn-danger { background: #fff1f2; border: 1px solid #fecdd3; color: #be123c; }
-
-    /* PROCESSING SCREEN */
-    .proc-box {
-      text-align: center;
-      padding: 60px 20px;
-    }
-
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid #e2e8f0;
-      border-top: 4px solid #2563eb;
-      border-radius: 50%;
-      animation: spin 0.9s linear infinite;
-      margin: 0 auto 20px auto;
-    }
-
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-
-    /* RESULTS VIEW */
-    .winner-banner {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-
-    .winner-title {
-      font-size: 0.98rem;
-      font-weight: 800;
-      color: #1e3a8a;
-    }
-
-    .winner-desc {
-      font-size: 0.8rem;
-      color: #2563eb;
-      margin-top: 2px;
-    }
-
-    .side-card {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-
-    .side-title {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-
-    .demoted-box {
-      background: #fff1f2;
-      border: 1px solid #fecdd3;
-      border-radius: 10px;
-      padding: 12px;
-      margin-bottom: 16px;
-    }
-
-    .demoted-title {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: #9f1239;
-      text-transform: uppercase;
-    }
-
-    .demoted-text {
-      font-size: 0.78rem;
-      color: #881337;
-      margin-top: 4px;
-    }
-
-    /* EXPERIMENT 2 */
-    .exp-toggle-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .toggle-btn {
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      padding: 10px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .meter-box {
-      background: #faf5ff;
-      border: 1px solid #e9d5ff;
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 16px;
-    }
-
+    /* FOOTER */
     .footer-note {
       text-align: center;
       font-size: 0.72rem;
       color: #94a3b8;
-      margin-top: 24px;
+      margin-top: 20px;
+      padding: 0 10px;
     }
   </style>
 </head>
@@ -405,534 +197,82 @@
   <header class="top-bar">
     <span class="brand-title">Teste Retórico</span>
     <span class="badge-sim">Simulação Didática</span>
-    <button id="btn-reset-global" style="background:none; border:none; color:#64748b; font-size:0.75rem; font-weight:600;">🔄 Limpar</button>
   </header>
 
   <main class="container">
+    <h1 class="page-title">HORA DO DESAFIO</h1>
+    <p class="page-subtitle">Qual destes conteúdos faria você parar de rolar o feed?</p>
 
-    <!-- VIEW 1: DESAFIO & VOTAÇÃO -->
-    <section id="view-desafio" class="view-section active">
-      <h1 class="page-title">HORA DO DESAFIO</h1>
-      <p class="page-subtitle">Qual conteúdo faria você parar de rolar?</p>
-
-      <button class="btn btn-secondary" id="btn-open-editor" style="margin-bottom: 16px;">✏️ EDITAR CONTEÚDOS</button>
-
-      <!-- FEED PRINCIPAL -->
-      <div id="main-feed">
-        <!-- Card A -->
-        <article class="feed-card">
-          <span class="card-badge">OPÇÃO A</span>
-          <div class="card-header">
-            <div class="avatar" style="background:#ffe4e6; color:#be123c;">A</div>
-            <div class="profile-info">
-              <span class="profile-name">@hype_viral</span>
-              <span class="profile-meta">Recomendado</span>
-            </div>
+    <!-- FEED DE OPÇÕES -->
+    <div id="main-feed">
+      <!-- Card A -->
+      <article class="feed-card">
+        <span class="card-badge">OPÇÃO A</span>
+        <div class="card-header">
+          <div class="avatar" style="background:#ffe4e6; color:#be123c;">A</div>
+          <div class="profile-info">
+            <span class="profile-name">@hype_viral</span>
+            <span class="profile-meta">Recomendado</span>
           </div>
-          <div class="card-media-wrapper">
-            <img class="card-media" id="img-a" src="img_a.png" alt="Opção A" onerror="this.src=FALLBACK_A">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" id="title-a">...</h3>
-            <p class="card-caption" id="caption-a">...</p>
-            <span class="retoric-tag tag-a">Pathos • Indignação • Urgência</span>
-          </div>
-        </article>
-
-        <!-- Card B -->
-        <article class="feed-card">
-          <span class="card-badge">OPÇÃO B</span>
-          <div class="card-header">
-            <div class="avatar" style="background:#fef3c7; color:#b45309;">B</div>
-            <div class="profile-info">
-              <span class="profile-name">@trends_pets</span>
-              <span class="profile-meta">Em Alta</span>
-            </div>
-          </div>
-          <div class="card-media-wrapper">
-            <img class="card-media" id="img-b" src="img_b.png" alt="Opção B" onerror="this.src=FALLBACK_B">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" id="title-b">...</h3>
-            <p class="card-caption" id="caption-b">...</p>
-            <span class="retoric-tag tag-b">Humor • Recompensa Rápida</span>
-          </div>
-        </article>
-
-        <!-- Card C -->
-        <article class="feed-card">
-          <span class="card-badge">OPÇÃO C</span>
-          <div class="card-header">
-            <div class="avatar" style="background:#dbeafe; color:#1d4ed8;">C</div>
-            <div class="profile-info">
-              <span class="profile-name">@edu_pensadores</span>
-              <span class="profile-meta">Artigo Destaque</span>
-            </div>
-          </div>
-          <div class="card-media-wrapper">
-            <img class="card-media" id="img-c" src="img_c.png" alt="Opção C" onerror="this.src=FALLBACK_C">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title" id="title-c">...</h3>
-            <p class="card-caption" id="caption-c">...</p>
-            <span class="retoric-tag tag-c">Logos • Reflexão • Estudo</span>
-          </div>
-        </article>
-      </div>
-
-      <!-- PAINEL DE VOTOS -->
-      <div class="panel-box">
-        <div class="panel-header">
-          <span>📊 RESULTADOS DA VOTAÇÃO</span>
         </div>
-
-        <div class="vote-input-card">
-          <label class="vote-label">A: Notícia Polêmica</label>
-          <input type="number" min="0" value="0" class="vote-input" id="input-a">
-          <div class="bar-bg"><div class="bar-fill" id="bar-a" style="background:#e11d48;"></div></div>
-          <span class="pct-text" id="pct-a">0% (0 votos)</span>
+        <div class="card-media-wrapper">
+          <img class="card-media" src="img_a.png" alt="Opção A" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'500\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23ffe4e6\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-weight=\'bold\' font-size=\'24\' text-anchor=\'middle\' fill=\'%23be123c\'>OPÇÃO A</text></svg>';">
         </div>
-
-        <div class="vote-input-card">
-          <label class="vote-label">B: Entretenimento Rápido</label>
-          <input type="number" min="0" value="0" class="vote-input" id="input-b">
-          <div class="bar-bg"><div class="bar-fill" id="bar-b" style="background:#d97706;"></div></div>
-          <span class="pct-text" id="pct-b">0% (0 votos)</span>
+        <div class="card-body">
+          <h3 class="card-title">BASTIDORES EXCLUSIVOS: A treta entre dois grandes influenciadores que parou a internet hoje!</h3>
+          <p class="card-caption">Você não vai acreditar no que aconteceu. Veja os detalhes antes que sumam.</p>
+          <span class="retoric-tag tag-a">Pathos • Indignação • Urgência</span>
         </div>
+      </article>
 
-        <div class="vote-input-card">
-          <label class="vote-label">C: Conteúdo Profundo</label>
-          <input type="number" min="0" value="0" class="vote-input" id="input-c">
-          <div class="bar-bg"><div class="bar-fill" id="bar-c" style="background:#2563eb;"></div></div>
-          <span class="pct-text" id="pct-c">0% (0 votos)</span>
-        </div>
-
-        <div style="font-size:0.85rem; font-weight:700; text-align:right; margin: 10px 0;" id="total-display">
-          Total: 0 participantes
-        </div>
-
-        <button class="btn btn-secondary" id="btn-fill-ex">⚡ Exemplo (65% / 25% / 10%)</button>
-        <button class="btn btn-danger" id="btn-clear-votes">🗑️ Limpar Votos</button>
-        <button class="btn btn-primary" id="btn-process" disabled>🚀 PROCESSAR RESULTADO</button>
-      </div>
-    </section>
-
-    <!-- VIEW 2: EDITOR -->
-    <section id="view-editor" class="view-section">
-      <h1 class="page-title">EDITAR CONTEÚDOS</h1>
-      <p class="page-subtitle">Altere textos ou selecione novas imagens</p>
-
-      <div class="panel-box">
-        <!-- Editor A -->
-        <div style="margin-bottom:16px;">
-          <strong style="color:#be123c; font-size:0.85rem;">OPÇÃO A</strong>
-          <input type="text" id="edit-t-a" class="vote-input" style="margin-top:4px;" placeholder="Título A">
-          <input type="text" id="edit-c-a" class="vote-input" style="margin-top:4px;" placeholder="Legenda A">
-          <input type="file" accept="image/*" id="file-a" class="vote-input" style="margin-top:4px; font-size:0.75rem;">
-        </div>
-
-        <!-- Editor B -->
-        <div style="margin-bottom:16px;">
-          <strong style="color:#b45309; font-size:0.85rem;">OPÇÃO B</strong>
-          <input type="text" id="edit-t-b" class="vote-input" style="margin-top:4px;" placeholder="Título B">
-          <input type="text" id="edit-c-b" class="vote-input" style="margin-top:4px;" placeholder="Legenda B">
-          <input type="file" accept="image/*" id="file-b" class="vote-input" style="margin-top:4px; font-size:0.75rem;">
-        </div>
-
-        <!-- Editor C -->
-        <div style="margin-bottom:16px;">
-          <strong style="color:#1d4ed8; font-size:0.85rem;">OPÇÃO C</strong>
-          <input type="text" id="edit-t-c" class="vote-input" style="margin-top:4px;" placeholder="Título C">
-          <input type="text" id="edit-c-c" class="vote-input" style="margin-top:4px;" placeholder="Legenda C">
-          <input type="file" accept="image/*" id="file-c" class="vote-input" style="margin-top:4px; font-size:0.75rem;">
-        </div>
-
-        <button class="btn btn-primary" id="btn-save-edit">💾 SALVAR ALTERAÇÕES</button>
-        <button class="btn btn-secondary" id="btn-cancel-edit">CANCELAR</button>
-        <button class="btn btn-danger" id="btn-restore-defaults">🔄 RESTAURAR PADRÕES</button>
-      </div>
-    </section>
-
-    <!-- VIEW 3: PROCESSANDO -->
-    <section id="view-proc" class="view-section">
-      <div class="proc-box">
-        <div class="spinner"></div>
-        <div id="proc-text" style="font-size:1.1rem; font-weight:800; color:#0f172a;">Registrando interações...</div>
-        <p style="font-size:0.8rem; color:#64748b; margin-top:8px;">Ajustando pesos de recomendação no feed</p>
-      </div>
-    </section>
-
-    <!-- VIEW 4: RESULTADO -->
-    <section id="view-resultado" class="view-section">
-      <h1 class="page-title" style="text-align:left;">Seu feed foi personalizado.</h1>
-      <p class="page-subtitle" style="text-align:left;">O algoritmo reorganizou o fluxo de postagens para este perfil coletivo.</p>
-
-      <div class="winner-banner">
-        <div class="winner-title" id="win-headline">...</div>
-        <div class="winner-desc" id="win-sub">...</div>
-      </div>
-
-      <div class="side-card">
-        <div class="side-title">💡 POR QUE ESTOU VENDO ISSO?</div>
-        <p id="algo-explain" style="font-size:0.82rem; color:#334155; margin-bottom:12px;">...</p>
-        <div id="indicators-list"></div>
-      </div>
-
-      <div class="demoted-box">
-        <div class="demoted-title">🔻 OLHE O QUE SUMIU</div>
-        <div class="demoted-text" id="demoted-explain">...</div>
-      </div>
-
-      <h2 style="font-size:0.85rem; font-weight:800; color:#64748b; text-transform:uppercase; margin-bottom:12px;">
-        Novo Fluxo Recomendado
-      </h2>
-
-      <div id="personalized-feed"></div>
-
-      <div style="margin-top:20px;">
-        <button class="btn btn-primary" id="btn-go-exp2">🧪 MUDAR A LINGUAGEM</button>
-        <button class="btn btn-secondary" id="btn-back-challenge">⬅️ Voltar ao Desafio</button>
-      </div>
-    </section>
-
-    <!-- VIEW 5: EXPERIMENTO 2 -->
-    <section id="view-exp2" class="view-section">
-      <h1 class="page-title">EXPERIMENTO 2</h1>
-      <p class="page-subtitle">Mude a linguagem. O assunto continua o mesmo.</p>
-
-      <div class="panel-box" style="margin-top:0;">
-        <div style="background:#f1f5f9; padding:10px; border-left:3px solid #2563eb; border-radius:4px; margin-bottom:14px;">
-          <span style="font-size:0.7rem; font-weight:700; color:#64748b; text-transform:uppercase;">Tema Unificado</span>
-          <div style="font-size:0.95rem; font-weight:800; color:#0f172a;">Impactos da Inteligência Artificial na Educação</div>
-        </div>
-
-        <div class="exp-toggle-group">
-          <label class="toggle-btn"><input type="checkbox" id="chk-caps"> CAPS LOCK</label>
-          <label class="toggle-btn"><input type="checkbox" id="chk-urgency"> Urgência</label>
-          <label class="toggle-btn"><input type="checkbox" id="chk-emotion"> Emocional</label>
-          <label class="toggle-btn"><input type="checkbox" id="chk-question"> Pergunta</label>
-        </div>
-
-        <!-- PRÉVIA -->
-        <article class="feed-card" style="box-shadow:none; border:1px solid #cbd5e1;">
-          <div class="card-header">
-            <div class="avatar" style="background:#3b82f6; color:#fff;">IA</div>
-            <div class="profile-info">
-              <span class="profile-name">@educacao_futuro</span>
-              <span class="profile-meta">Enquadramento Retórico</span>
-            </div>
+      <!-- Card B -->
+      <article class="feed-card">
+        <span class="card-badge">OPÇÃO B</span>
+        <div class="card-header">
+          <div class="avatar" style="background:#fef3c7; color:#b45309;">B</div>
+          <div class="profile-info">
+            <span class="profile-name">@trends_pets</span>
+            <span class="profile-meta">Em Alta</span>
           </div>
-          <div class="card-body">
-            <h3 class="card-title" id="exp-preview-t">Impactos da Inteligência Artificial na educação</h3>
-            <p class="card-caption" id="exp-preview-c">Um estudo sobre como ferramentas de IA estão transformando a sala de aula e o aprendizado.</p>
-            <span class="retoric-tag tag-c" id="exp-preview-tag">Linguagem Neutra</span>
-          </div>
-        </article>
-
-        <!-- BARRA ATRAÇÃO -->
-        <div class="meter-box">
-          <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:#7e22ce; margin-bottom:4px;">
-            <span>ATRAÇÃO IMEDIATA</span>
-            <span id="exp-pct-val">20%</span>
-          </div>
-          <div class="bar-bg" style="background:#f3e8ff;">
-            <div class="bar-fill" id="exp-bar" style="background:linear-gradient(90deg, #a855f7, #ec4899); width:20%;"></div>
-          </div>
-          <p style="font-size:0.68rem; color:#6b21a8; margin-top:6px;">* Representação didática do potencial de parada de rolagem.</p>
         </div>
+        <div class="card-media-wrapper">
+          <img class="card-media" src="img_b.png" alt="Opção B" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'500\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23fef3c7\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-weight=\'bold\' font-size=\'24\' text-anchor=\'middle\' fill=\'%23b45309\'>OPÇÃO B</text></svg>';">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Vídeo de 15 segundos: a dancinha/trend do momento com pet fofo que viralizou.</h3>
+          <p class="card-caption">É rápido, é fofo e você pode assistir em poucos segundos.</p>
+          <span class="retoric-tag tag-b">Humor • Recompensa Rápida</span>
+        </div>
+      </article>
 
-        <button class="btn btn-secondary" id="btn-exp-to-res">⬅️ Voltar aos Resultados</button>
-        <button class="btn btn-secondary" id="btn-exp-to-desafio">🔄 Reiniciar no Desafio</button>
-      </div>
-    </section>
-
+      <!-- Card C -->
+      <article class="feed-card">
+        <span class="card-badge">OPÇÃO C</span>
+        <div class="card-header">
+          <div class="avatar" style="background:#dbeafe; color:#1d4ed8;">C</div>
+          <div class="profile-info">
+            <span class="profile-name">@edu_pensadores</span>
+            <span class="profile-meta">Artigo Destaque</span>
+          </div>
+        </div>
+        <div class="card-media-wrapper">
+          <img class="card-media" src="img_c.png" alt="Opção C" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'500\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23dbeafe\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-weight=\'bold\' font-size=\'24\' text-anchor=\'middle\' fill=\'%231d4ed8\'>OPÇÃO C</text></svg>';">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Análise de 10 páginas sobre os impactos da Inteligência Artificial no futuro da educação.</h3>
+          <p class="card-caption">Um conteúdo para ler com calma, comparar argumentos e refletir.</p>
+          <span class="retoric-tag tag-c">Logos • Reflexão • Estudo</span>
+        </div>
+      </article>
+    </div>
   </main>
 
   <footer class="footer-note">
-    Protótipo fictício para apresentação pedagógica. Não é um produto do Instagram.
+    Protótipo fictício para apresentação pedagógica. Não é um produto ou serviço do Instagram.
   </footer>
 
-  <script>
-    // FALLBACK SVG DATA URLS (Garante visualização se a imagem local falhar)
-    const FALLBACK_A = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='100%' height='100%' fill='%23ffe4e6'/><text x='50%' y='45%' font-family='sans-serif' font-weight='800' font-size='26' text-anchor='middle' fill='%23be123c'>OPÇÃO A</text><text x='50%' y='60%' font-family='sans-serif' font-size='16' text-anchor='middle' fill='%23e11d48'>Notícia Polêmica / Treta</text></svg>";
-    const FALLBACK_B = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='100%' height='100%' fill='%23fef3c7'/><text x='50%' y='45%' font-family='sans-serif' font-weight='800' font-size='26' text-anchor='middle' fill='%23b45309'>OPÇÃO B</text><text x='50%' y='60%' font-family='sans-serif' font-size='16' text-anchor='middle' fill='%23d97706'>Pet Fofo / Entretenimento</text></svg>";
-    const FALLBACK_C = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='100%' height='100%' fill='%23dbeafe'/><text x='50%' y='45%' font-family='sans-serif' font-weight='800' font-size='26' text-anchor='middle' fill='%231d4ed8'>OPÇÃO C</text><text x='50%' y='60%' font-family='sans-serif' font-size='16' text-anchor='middle' fill='%232563eb'>Estudo de IA / Análise</text></svg>";
-
-    const DEFAULTS = {
-      a: {
-        title: "BASTIDORES EXCLUSIVOS: A treta entre dois grandes influenciadores que parou a internet hoje!",
-        caption: "Você não vai acreditar no que aconteceu. Veja os detalhes antes que sumam.",
-        image: "img_a.jpg"
-      },
-      b: {
-        title: "Vídeo de 15 segundos: a dancinha/trend do momento com pet fofo que viralizou.",
-        caption: "É rápido, é fofo e você pode assistir em poucos segundos.",
-        image: "img_b.jpg"
-      },
-      c: {
-        title: "Análise de 10 páginas sobre os impactos da Inteligência Artificial no futuro da educação.",
-        caption: "Um conteúdo para ler com calma, comparar argumentos e refletir.",
-        image: "img_c.jpg"
-      }
-    };
-
-    let contents = JSON.parse(JSON.stringify(DEFAULTS));
-    let tempContents = JSON.parse(JSON.stringify(DEFAULTS));
-    let votes = { a: 0, b: 0, c: 0 };
-
-    function loadState() {
-      try {
-        const c = localStorage.getItem('retorico_c');
-        const v = localStorage.getItem('retorico_v');
-        if (c) contents = JSON.parse(c);
-        if (v) votes = JSON.parse(v);
-      } catch(e) {}
-    }
-
-    function saveState() {
-      try {
-        localStorage.setItem('retorico_c', JSON.stringify(contents));
-        localStorage.setItem('retorico_v', JSON.stringify(votes));
-      } catch(e) {}
-    }
-
-    function showView(id) {
-      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      window.scrollTo(0,0);
-    }
-
-    function renderFeed() {
-      ['a','b','c'].forEach(k => {
-        document.getElementById(`title-${k}`).textContent = contents[k].title;
-        document.getElementById(`caption-${k}`).textContent = contents[k].caption;
-        if (contents[k].image) {
-          document.getElementById(`img-${k}`).src = contents[k].image;
-        }
-      });
-    }
-
-    function updateVotesUI() {
-      const a = parseInt(votes.a) || 0;
-      const b = parseInt(votes.b) || 0;
-      const c = parseInt(votes.c) || 0;
-      const total = a + b + c;
-
-      document.getElementById('input-a').value = a;
-      document.getElementById('input-b').value = b;
-      document.getElementById('input-c').value = c;
-
-      const pctA = total > 0 ? Math.round((a / total) * 100) : 0;
-      const pctB = total > 0 ? Math.round((b / total) * 100) : 0;
-      const pctC = total > 0 ? Math.max(0, 100 - pctA - pctB) : 0;
-
-      document.getElementById('bar-a').style.width = pctA + '%';
-      document.getElementById('bar-b').style.width = pctB + '%';
-      document.getElementById('bar-c').style.width = pctC + '%';
-
-      document.getElementById('pct-a').textContent = `${pctA}% (${a} votos)`;
-      document.getElementById('pct-b').textContent = `${pctB}% (${b} votos)`;
-      document.getElementById('pct-c').textContent = `${pctC}% (${c} votos)`;
-
-      document.getElementById('total-display').textContent = `Total: ${total} participantes`;
-      document.getElementById('btn-process').disabled = (total === 0);
-    }
-
-    function runProcessing() {
-      showView('view-proc');
-      const phrases = ["Registrando interações...", "Identificando padrões linguísticos...", "Personalizando o feed..."];
-      let i = 0;
-      const interval = setInterval(() => {
-        i++;
-        if (phrases[i]) document.getElementById('proc-text').textContent = phrases[i];
-      }, 600);
-
-      setTimeout(() => {
-        clearInterval(interval);
-        renderResults();
-        showView('view-resultado');
-      }, 2000);
-    }
-
-    function renderResults() {
-      const a = votes.a, b = votes.b, c = votes.c;
-      const total = a + b + c;
-      const pctA = Math.round((a/total)*100) || 0;
-      const pctB = Math.round((b/total)*100) || 0;
-      const pctC = Math.max(0, 100 - pctA - pctB);
-
-      let winner = 'a';
-      if (pctB > pctA && pctB >= pctC) winner = 'b';
-      if (pctC > pctA && pctC > pctB) winner = 'c';
-
-      const winHead = document.getElementById('win-headline');
-      const winSub = document.getElementById('win-sub');
-      const algoEx = document.getElementById('algo-explain');
-      const demEx = document.getElementById('demoted-explain');
-
-      if (winner === 'a') {
-        winHead.textContent = `${pctA}% das interações apontaram para A - Notícia Polêmica`;
-        winSub.textContent = "Apelo emocional e indignação lideraram a retenção.";
-        algoEx.textContent = "O sistema detectou que apelo emocional, urgência e curiosidade funcionaram como sinais prioritários de atenção.";
-        demEx.textContent = "A análise sobre Inteligência Artificial (Opção C) recebeu menos interações e foi rebaixada no feed.";
-      } else if (winner === 'b') {
-        winHead.textContent = `${pctB}% das interações apontaram para B - Entretenimento Rápido`;
-        winSub.textContent = "Recompensa rápida e baixo esforço cognitivo venceram.";
-        algoEx.textContent = "O sistema detectou preferência por formatos curtos, leveza e consumo imediato.";
-        demEx.textContent = "A análise aprofundada de 10 páginas (Opção C) teve baixa taxa de cliques relativa e sumiu do fluxo principal.";
-      } else {
-        winHead.textContent = `${pctC}% das interações apontaram para C - Conteúdo Profundo`;
-        winSub.textContent = "A audiência priorizou análise e reflexão.";
-        algoEx.textContent = "O sistema detectou interesse em reflexão e leitura extensa, priorizando autoridade e dados.";
-        demEx.textContent = "Formatos de apelo rápido e sensação imediata receberam menos engajamento relativo e perderam espaço.";
-      }
-
-      // Render Reorganized Cards
-      const container = document.getElementById('personalized-feed');
-      container.innerHTML = '';
-      const order = winner === 'a' ? ['a','a','b','c'] : (winner === 'b' ? ['b','b','a','c'] : ['c','c','a','b']);
-
-      order.forEach((k, idx) => {
-        const item = contents[k];
-        const art = document.createElement('article');
-        art.className = 'feed-card';
-        art.innerHTML = `
-          <div class="card-header">
-            <div class="avatar">${k.toUpperCase()}</div>
-            <div class="profile-info">
-              <span class="profile-name">Conteúdo ${k.toUpperCase()}</span>
-              <span class="profile-meta">${idx === 0 ? 'Destaque Nº 1' : 'Recomendado'}</span>
-            </div>
-          </div>
-          <div class="card-media-wrapper">
-            <img class="card-media" src="${item.image}" style="max-height:260px;" onerror="this.src=FALLBACK_${k.toUpperCase()}">
-          </div>
-          <div class="card-body">
-            <h3 class="card-title">${item.title}</h3>
-            <p class="card-caption">${item.caption}</p>
-          </div>
-        `;
-        container.appendChild(art);
-      });
-    }
-
-    function updateExp2() {
-      const caps = document.getElementById('chk-caps').checked;
-      const urg = document.getElementById('chk-urgency').checked;
-      const emo = document.getElementById('chk-emotion').checked;
-      const q = document.getElementById('chk-question').checked;
-
-      let title = "Impactos da Inteligência Artificial na educação";
-      let caption = "Um estudo sobre como ferramentas de IA estão transformando a sala de aula e o aprendizado.";
-      let score = 20;
-
-      if (urg) { title = "URGENTE! LEIA ANTES QUE APAGUEM: " + title; score += 25; }
-      if (q) { title += " — Você está preparado para isso?"; score += 15; }
-      if (caps) { title = title.toUpperCase(); score += 20; }
-      if (emo) { caption = "Você precisa ver isso agora! O futuro das escolas mudou para sempre e quase ninguém percebeu!"; score += 20; }
-
-      score = Math.min(100, score);
-
-      document.getElementById('exp-preview-t').textContent = title;
-      document.getElementById('exp-preview-c').textContent = caption;
-      document.getElementById('exp-pct-val').textContent = score + '%';
-      document.getElementById('exp-bar').style.width = score + '%';
-    }
-
-    // EVENT LISTENERS
-    document.addEventListener('DOMContentLoaded', () => {
-      loadState();
-      renderFeed();
-      updateVotesUI();
-
-      ['a','b','c'].forEach(k => {
-        document.getElementById(`input-${k}`).addEventListener('input', (e) => {
-          votes[k] = parseInt(e.target.value) || 0;
-          updateVotesUI();
-          saveState();
-        });
-      });
-
-      document.getElementById('btn-fill-ex').addEventListener('click', () => {
-        votes = { a: 13, b: 5, c: 2 };
-        updateVotesUI();
-        saveState();
-      });
-
-      document.getElementById('btn-clear-votes').addEventListener('click', () => {
-        votes = { a: 0, b: 0, c: 0 };
-        updateVotesUI();
-        saveState();
-      });
-
-      document.getElementById('btn-process').addEventListener('click', runProcessing);
-
-      document.getElementById('btn-open-editor').addEventListener('click', () => {
-        tempContents = JSON.parse(JSON.stringify(contents));
-        ['a','b','c'].forEach(k => {
-          document.getElementById(`edit-t-${k}`).value = tempContents[k].title;
-          document.getElementById(`edit-c-${k}`).value = tempContents[k].caption;
-        });
-        showView('view-editor');
-      });
-
-      // File Reader Handlers
-      ['a','b','c'].forEach(k => {
-        document.getElementById(`file-${k}`).addEventListener('change', (e) => {
-          const file = e.target.files[0];
-          if (file) {
-            const r = new FileReader();
-            r.onload = (ev) => { tempContents[k].image = ev.target.result; };
-            r.readAsDataURL(file);
-          }
-        });
-      });
-
-      document.getElementById('btn-save-edit').addEventListener('click', () => {
-        ['a','b','c'].forEach(k => {
-          tempContents[k].title = document.getElementById(`edit-t-${k}`).value;
-          tempContents[k].caption = document.getElementById(`edit-c-${k}`).value;
-        });
-        contents = JSON.parse(JSON.stringify(tempContents));
-        saveState();
-        renderFeed();
-        showView('view-desafio');
-      });
-
-      document.getElementById('btn-cancel-edit').addEventListener('click', () => showView('view-desafio'));
-
-      document.getElementById('btn-restore-defaults').addEventListener('click', () => {
-        if (confirm('Restaurar os dados originais?')) {
-          contents = JSON.parse(JSON.stringify(DEFAULTS));
-          saveState();
-          renderFeed();
-          showView('view-desafio');
-        }
-      });
-
-      document.getElementById('btn-go-exp2').addEventListener('click', () => {
-        updateExp2();
-        showView('view-exp2');
-      });
-
-      document.getElementById('btn-back-challenge').addEventListener('click', () => showView('view-desafio'));
-      document.getElementById('btn-exp-to-res').addEventListener('click', () => showView('view-resultado'));
-      document.getElementById('btn-exp-to-desafio').addEventListener('click', () => showView('view-desafio'));
-
-      ['chk-caps','chk-urgency','chk-emotion','chk-question'].forEach(id => {
-        document.getElementById(id).addEventListener('change', updateExp2);
-      });
-
-      document.getElementById('btn-reset-global').addEventListener('click', () => {
-        if (confirm('Reiniciar protótipo completo?')) {
-          localStorage.clear();
-          contents = JSON.parse(JSON.stringify(DEFAULTS));
-          votes = { a: 0, b: 0, c: 0 };
-          renderFeed();
-          updateVotesUI();
-          showView('view-desafio');
-        }
-      });
+</body>
+</html>
     });
   </script>
 </body>
